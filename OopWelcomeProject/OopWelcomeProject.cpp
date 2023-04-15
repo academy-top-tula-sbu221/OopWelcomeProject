@@ -1,5 +1,19 @@
 ﻿#include <iostream>
 
+enum class Color
+{
+    Black,
+    White,
+    Red
+};
+
+enum class Fruit
+{
+    Apple,
+    Orange,
+    Ananas
+};
+
 using namespace std;
 
 class Fraction
@@ -36,6 +50,32 @@ public:
         return denominator;
     }
 
+    void Add(Fraction f)
+    {
+        this->numerator = this->numerator * f.denominator
+            + this->denominator * f.numerator;
+        this->denominator *= f.denominator;
+    }
+
+    Fraction Plus(Fraction f)
+    {
+        Fraction fresult;
+        fresult.numerator = this->numerator * f.denominator
+            + this->denominator * f.numerator;
+        fresult.denominator = this->denominator * f.denominator;
+        return fresult;
+    }
+
+    Fraction Minus(Fraction f)
+    {
+        Fraction fresult;
+        fresult.numerator = this->numerator * f.denominator
+            - this->denominator * f.numerator;
+        fresult.denominator = this->denominator * f.denominator;
+        return fresult;
+    }
+
+
     void Print()
     {
         cout << "[" << numerator << "/" << denominator << "]";
@@ -56,14 +96,27 @@ struct FractionS
 
 int main()
 {
-    FractionS f1;
-    f1.numerator = 10;
-    f1.denominator = 0;
+    Fraction f1(2, 3);
+    f1.PrintLine();
 
-    Fraction f;
-    //f.SetNumerator(10);
-    //f.SetDenominator(37);
-    f.PrintLine();
+    Fraction f2(3, 4);
+    f2.PrintLine();
 
+    Fraction f3(4, 5);
+    f3.PrintLine();
+
+    Fraction fres = f1.Plus(f2).Minus(f3).Plus(f1);
+
+    //f1.Add(f2);
+    //f1.PrintLine();
+
+    Color color = Color::White;
+    Fruit fruit = Fruit::Orange;
+
+    Color color1 = Color::Red;
+
+    //cout << (color == fruit);
     
+
+    color = Color::Black;
 }

@@ -75,6 +75,25 @@ public:
         return fresult;
     }
 
+    friend Fraction operator+(const Fraction& f1, const Fraction& f2);
+    friend Fraction operator+(int number, Fraction f);
+    friend Fraction operator+(Fraction f, int number);
+
+    friend Fraction operator*(const Fraction& f1, const Fraction& f2);
+
+    friend bool operator<(const Fraction& f1, const Fraction& f2);
+    friend bool operator>=(const Fraction& f1, const Fraction& f2);
+
+    friend ostream& operator<<(ostream& out, const Fraction& f);
+    friend istream& operator>>(istream& in, Fraction& f);
+
+    /*Fraction operator+(int number)
+    {
+        Fraction fresult;
+        fresult.numerator = this->numerator + this->denominator * number;
+        fresult.denominator = this->denominator;
+        return fresult;
+    }*/
 
     void Print()
     {
@@ -88,6 +107,65 @@ public:
     }
 };
 
+Fraction operator+(const Fraction& f1, const Fraction& f2)
+{
+    Fraction fresult;
+    fresult.numerator = f1.numerator * f2.denominator
+        + f1.denominator * f2.numerator;
+    fresult.denominator = f1.denominator * f2.denominator;
+    return fresult;
+}
+
+Fraction operator*(const Fraction& f1, const Fraction& f2)
+{
+    Fraction fresult;
+    fresult.numerator = f1.numerator * f2.numerator;
+    fresult.denominator = f1.denominator * f2.denominator;
+    return fresult;
+}
+
+Fraction operator+(int number, Fraction f)
+{
+    Fraction fresult;
+    // non friend function
+    /*fresult.SetNumerator(f.GetNumerator() + f.GetDenominator() * number);
+    fresult.SetDenominator(f.GetDenominator());*/
+
+    fresult.numerator = f.numerator + f.denominator * number;
+    fresult.denominator = f.denominator;
+
+    return fresult;
+}
+
+Fraction operator+(Fraction f, int number)
+{
+    return number + f;
+}
+
+bool operator<(const Fraction& f1, const Fraction& f2)
+{
+    return f1.numerator * f2.denominator < f1.denominator * f2.numerator;
+}
+
+bool operator>=(const Fraction& f1, const Fraction& f2)
+{
+    return !(f1 < f2);
+}
+
+ostream& operator<<(ostream& out, const Fraction& f)
+{
+    out << "[" << f.numerator << "/" << f.denominator << "]";
+    return out;
+}
+
+istream& operator>>(istream& in, Fraction& f)
+{
+    in >> f.numerator;
+    in >> f.denominator;
+    return in;
+}
+
+
 struct FractionS
 {
     int numerator;
@@ -97,15 +175,27 @@ struct FractionS
 int main()
 {
     Fraction f1(2, 3);
-    f1.PrintLine();
+    //f1.PrintLine();
 
     Fraction f2(3, 4);
-    f2.PrintLine();
+    //f2.PrintLine();
 
     Fraction f3(4, 5);
-    f3.PrintLine();
+    //f3.PrintLine();
 
     Fraction fres = f1.Plus(f2).Minus(f3).Plus(f1);
+
+    Fraction f4 = f1 + f2;
+    int n = 10;
+    f4 = n + f1;
+    //f4.PrintLine();
+    //cout << f4;
+
+
+    Fraction f5;
+    cin >> f5;
+    cout << f5;
+
 
     //f1.Add(f2);
     //f1.PrintLine();

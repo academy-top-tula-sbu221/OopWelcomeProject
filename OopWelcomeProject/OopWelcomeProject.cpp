@@ -87,6 +87,19 @@ public:
     friend ostream& operator<<(ostream& out, const Fraction& f);
     friend istream& operator>>(istream& in, Fraction& f);
 
+    Fraction operator++()
+    {
+        this->numerator += this->denominator;
+        return *this;
+    }
+
+    Fraction operator++(int)
+    {
+        Fraction copy = *this;
+        ++(*this);
+        return copy;
+    }
+
     /*Fraction operator+(int number)
     {
         Fraction fresult;
@@ -183,30 +196,34 @@ int main()
     Fraction f3(4, 5);
     //f3.PrintLine();
 
-    Fraction fres = f1.Plus(f2).Minus(f3).Plus(f1);
+    Fraction f4 = f1++;
 
-    Fraction f4 = f1 + f2;
-    int n = 10;
-    f4 = n + f1;
-    //f4.PrintLine();
-    //cout << f4;
+    cout << f1 << " " << f4;
+
+    //Fraction fres = f1.Plus(f2).Minus(f3).Plus(f1);
+
+    //Fraction f4 = f1 + f2;
+    //int n = 10;
+    //f4 = n + f1;
+    ////f4.PrintLine();
+    ////cout << f4;
 
 
-    Fraction f5;
-    cin >> f5;
-    cout << f5;
+    //Fraction f5;
+    //cin >> f5;
+    //cout << f5;
 
 
-    //f1.Add(f2);
-    //f1.PrintLine();
+    ////f1.Add(f2);
+    ////f1.PrintLine();
 
-    Color color = Color::White;
-    Fruit fruit = Fruit::Orange;
+    //Color color = Color::White;
+    //Fruit fruit = Fruit::Orange;
 
-    Color color1 = Color::Red;
+    //Color color1 = Color::Red;
 
     //cout << (color == fruit);
     
 
-    color = Color::Black;
+    //color = Color::Black;
 }
